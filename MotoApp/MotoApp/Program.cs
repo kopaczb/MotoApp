@@ -1,5 +1,5 @@
 ﻿// II - SILA GENERYCZNOSCI W C#
-// Ograniczenie typów generycznych
+// Ograniczenie new()
 
 using MotoApp.Entities;
 using MotoApp.Repositories;
@@ -10,4 +10,4 @@ employeeRepository.Add(new MotoApp.Entities.Employee { FirstName = "Piotr" });
 employeeRepository.Add(new MotoApp.Entities.Employee { FirstName = "Zuzia" });
 employeeRepository.Save();
 
-// Ograniczenie new()
+// Rozwiazanie z generycznym interfacem

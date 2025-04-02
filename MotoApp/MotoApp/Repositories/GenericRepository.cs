@@ -3,9 +3,14 @@
 namespace MotoApp.Repositories
 {
     public class GenericRepository<TEntity, TKey> 
-        where TEntity : class, IEntity
+        //where TEntity : class, IEntity // : klasa, która dziedziczy po IEntity
+        where TEntity : class, IEntity, new() // :klasa, która dziedziczy po IEntity, klasa dziedziczaca IEntity musi miec bezparametrowy konstruktor, my testowalismy na klasi Employee
         where TKey : struct
     {
+        public TEntity CreateNewItem()
+        {
+            return new TEntity();
+        }
         public TKey? Key { get; set; }
         protected readonly List<TEntity> _items = new();
         public void Add(TEntity item)
