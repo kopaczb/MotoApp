@@ -1,5 +1,5 @@
 ﻿// II - SILA GENERYCZNOSCI W C#
-// Jak napisać generyczne repozytorium
+// Dziedziczenie typow generycznych
 
 using MotoApp.Entities;
 using MotoApp.Repositories;
@@ -10,4 +10,4 @@ employeeRepository.Add(new MotoApp.Entities.Employee { FirstName = "Piotr" });
 employeeRepository.Add(new MotoApp.Entities.Employee { FirstName = "Zuzia" });
 employeeRepository.Save();
 
-// Dziedziczenie typów generycznych
+// Wiele typow generycznych w jednej klasie
