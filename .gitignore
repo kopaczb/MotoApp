@@ -399,3 +399,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /MotoApp/MotoApp/BasicStack.cs
+/MotoApp/MotoApp/Repositories/EmployeeRepository.cs
+/MotoApp/MotoApp/Repositories/GenericRepository.cs
+/MotoApp/MotoApp/Repositories/GenericRepositoryWithRemove.cs
