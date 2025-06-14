@@ -1,27 +1,38 @@
-﻿// III - DELEGATY I METODY GENERYCZNE W C#
-// Wprowadzenie
+﻿// IV - DEPENDENCY INJECTION I PODSTAWY LINQ
 
 using MotoApp.Data;
 using MotoApp.Entities;
 using MotoApp.Repositories;
+using MotoApp.Repositories.Extensions;
 
-var employeeRepository = new SqlRepository<Employee>(new MotoAppDbContext());
-AddEmployees(employeeRepository);
-AddManagers(employeeRepository);
-WriteAllToConsole(employeeRepository);
+var employeeRepository = new SqlRepository<Employee>(new MotoAppDbContext(), EmployeeAdded);
+employeeRepository.ItemAdded += EmployeeRepositoryOnItemAdded;
 
-static void AddEmployees(IRepository<Employee> employeeRepository)
+void EmployeeRepositoryOnItemAdded(object? sender, Employee e)
 {
-    employeeRepository.Add(new Employee { FirstName = "Adam" });
-    employeeRepository.Add(new Employee { FirstName = "Piotr" });
-    employeeRepository.Add(new Employee { FirstName = "Zuzanna" });
+    Console.WriteLine($"Employee added => {e.FirstName} from {sender?.GetType().Name}");
 }
 
-static void AddManagers(IWriteRepository<Manager> managerRepository)
+AddEmployees(employeeRepository);
+WriteAllToConsole(employeeRepository);
+
+static void EmployeeAdded(object item)
+{ 
+    var employee = (Employee)item;
+    Console.WriteLine($"{employee.FirstName} added");
+}
+
+static void AddEmployees(IRepository<Employee> repository)
 {
-    managerRepository.Add(new Manager { FirstName = "Przemek" });
-    managerRepository.Add(new Manager { FirstName = "Tomek" });
-    managerRepository.Save();
+    var employees = new[]
+    {
+        new Employee { FirstName = "Adam" },
+        new Employee { FirstName = "Piotr" },
+        new Employee { FirstName = "Zuzanna" },
+    };
+
+    repository.AddBatch(employees);
+
 }
 
 static void WriteAllToConsole(IReadRepository<IEntity> repository)
