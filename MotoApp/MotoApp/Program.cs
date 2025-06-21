@@ -1,48 +1,67 @@
 ﻿// IV - DEPENDENCY INJECTION I PODSTAWY LINQ
 
-using MotoApp.Data;
+using Microsoft.Extensions.DependencyInjection;
+using MotoApp;
+using MotoApp.DataProviders;
 using MotoApp.Entities;
 using MotoApp.Repositories;
-using MotoApp.Repositories.Extensions;
 
-var employeeRepository = new SqlRepository<Employee>(new MotoAppDbContext(), EmployeeAdded);
-employeeRepository.ItemAdded += EmployeeRepositoryOnItemAdded;
+var services = new ServiceCollection();
+services.AddSingleton<IApp, App>();
+services.AddSingleton<IRepository<Employee>, ListRepository<Employee>>();
+services.AddSingleton<IRepository<Car>, ListRepository<Car>>();
+services.AddSingleton<ICarsProvider, CarProviderBasic>();
 
-void EmployeeRepositoryOnItemAdded(object? sender, Employee e)
-{
-    Console.WriteLine($"Employee added => {e.FirstName} from {sender?.GetType().Name}");
-}
+var serviceProvider = services.BuildServiceProvider();
+var app = serviceProvider.GetService<IApp>();
+app.Run();
 
-AddEmployees(employeeRepository);
-WriteAllToConsole(employeeRepository);
 
-static void EmployeeAdded(object item)
-{ 
-    var employee = (Employee)item;
-    Console.WriteLine($"{employee.FirstName} added");
-}
+//using MotoApp.Data;
+//using MotoApp.Entities;
+//using MotoApp.Repositories;
+//using MotoApp.Repositories.Extensions;
 
-static void AddEmployees(IRepository<Employee> repository)
-{
-    var employees = new[]
-    {
-        new Employee { FirstName = "Adam" },
-        new Employee { FirstName = "Piotr" },
-        new Employee { FirstName = "Zuzanna" },
-    };
+//var employeeRepository = new SqlRepository<Employee>(new MotoAppDbContext(), EmployeeAdded);
+//employeeRepository.ItemAdded += EmployeeRepositoryOnItemAdded;
 
-    repository.AddBatch(employees);
+//void EmployeeRepositoryOnItemAdded(object? sender, Employee e)
+//{
+//    Console.WriteLine($"Employee added => {e.FirstName} from {sender?.GetType().Name}");
+//}
 
-}
+//AddEmployees(employeeRepository);
+//WriteAllToConsole(employeeRepository);
 
-static void WriteAllToConsole(IReadRepository<IEntity> repository)
-{
-    var items = repository.GetAll();
-    foreach (var item in items)
-    { 
-        Console.WriteLine(item);    
-    }
-}
+//static void EmployeeAdded(object item)
+//{
+//    var employee = (Employee)item;
+//    Console.WriteLine($"{employee.FirstName} added");
+//}
 
+//static void AddEmployees(IRepository<Employee> repository)
+//{
+//    var employees = new[]
+//    {
+//        new Employee { FirstName = "Adam" },
+//        new Employee { FirstName = "Piotr" },
+//        new Employee { FirstName = "Zuzanna" },
+//    };
+
+//    repository.AddBatch(employees);
+
+//}
+
+//static void WriteAllToConsole(IReadRepository<IEntity> repository)
+//{
+//    var items = repository.GetAll();
+//    foreach (var item in items)
+//    {
+//        Console.WriteLine(item);
+//    }
+//}
+
+// *******************
 // Tu trzeba zacząć
-// Wprowadzenie
+// Zastosowanie select
+// *******************
