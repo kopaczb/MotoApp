@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 
 namespace MotoApp.DataProviders;
 
+/*
 public class CarProviderBasic : ICarsProvider
 {
     private readonly IRepository<Car> _carsRepository;
@@ -59,3 +60,4 @@ public class CarProviderBasic : ICarsProvider
         return list;
     }
 }
+*/
