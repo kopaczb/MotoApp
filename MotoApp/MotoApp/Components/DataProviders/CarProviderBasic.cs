@@ -1,8 +1,7 @@
-﻿using MotoApp.Entities;
-using MotoApp.Repositories;
+﻿
 using System.Net.Http.Headers;
 
-namespace MotoApp.DataProviders;
+namespace MotoApp.Components.DataProviders;
 
 /*
 public class CarProviderBasic : ICarsProvider

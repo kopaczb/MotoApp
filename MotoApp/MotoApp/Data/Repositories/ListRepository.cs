@@ -1,8 +1,8 @@
-﻿using MotoApp.Entities;
+﻿using MotoApp.Data.Entities;
 
-namespace MotoApp.Repositories
+namespace MotoApp.Data.Repositories
 {
-    public class ListRepository<T> : IRepository<T> where T : class, IEntity, new()       
+    public class ListRepository<T> : IRepository<T> where T : class, IEntity, new()
     {
         private readonly List<T> _items = new();
         public IEnumerable<T> GetAll()
@@ -24,7 +24,7 @@ namespace MotoApp.Repositories
         }
 
         public void Save()
-        { 
+        {
             // save is not required with List
         }
     }

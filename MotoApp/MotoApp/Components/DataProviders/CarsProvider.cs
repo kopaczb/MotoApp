@@ -1,10 +1,10 @@
-﻿using MotoApp.DataProviders.Extensions;
-using MotoApp.Entities;
-using MotoApp.Repositories;
+﻿using MotoApp.Components.DataProviders.Extensions;
+using MotoApp.Data.Entities;
+using MotoApp.Data.Repositories;
 using System.Linq;
 using System.Text;
 
-namespace MotoApp.DataProviders;
+namespace MotoApp.Components.DataProviders;
 
 public class CarsProvider : ICarsProvider
 {
@@ -253,7 +253,7 @@ public class CarsProvider : ICarsProvider
     // -------------------------
     List<Car[]> ICarsProvider.ChunkCars(int size)
     {
-        var cars = _carsRepository.GetAll(); 
+        var cars = _carsRepository.GetAll();
         return cars.Chunk(size).ToList();
     }
     // ---------------------------------------------

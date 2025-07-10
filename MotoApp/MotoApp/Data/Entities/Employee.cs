@@ -1,16 +1,16 @@
-﻿namespace MotoApp.Entities
+﻿namespace MotoApp.Data.Entities
 {
     public class Employee : EntityBase
     {
         // ***********************************
         public Employee()
         {
-            
+
         }
         // ***********************************
         public Employee(string name)
         {
-            
+
         }
         // ***********************************
         public string? FirstName { get; set; }
